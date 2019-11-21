@@ -10,16 +10,16 @@ function Pets() {
         body: JSON.stringify({ system_api_key: '4bdafbc5-c2cb-4a5a-8932-3bd929de4f18' })
       }
     ).then(res => {
-        return res.json();
+        return res.json()
       })
       .then(res => {
-        console.log(res.data.access_key);
-      });
+        console.log(res.data.access_key)
+      })
   }
   useEffect(() => {
-    sessionRequest();
-  }, []);
-  return <h1>Teste da Adopets</h1>;
+    sessionRequest()
+  }, [])
+  return <h1>Teste da Adopets</h1>
 }
 
 export default Pets
