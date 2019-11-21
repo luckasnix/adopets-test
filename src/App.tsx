@@ -1,8 +1,13 @@
 import React from 'react'
+import SessionProvider from './contexts/providers/SessionProvider'
 import Pets from './pages/Pets'
 
-function App() {
-  return <Pets/>
+const App: React.FC = () => {
+  return (
+    <SessionProvider>
+      <Pets/>
+    </SessionProvider>
+  )
 }
 
 export default App
