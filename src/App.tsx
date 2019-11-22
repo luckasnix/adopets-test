@@ -1,12 +1,12 @@
 import React from 'react'
-import SessionProvider from './contexts/providers/SessionProvider'
-import PetsPage from './pages/PetsPage'
+import SearcProvider from './contexts/providers/SearcProvider'
+import PetsMain from './pages/PetsMain'
 
 const App: React.FC = () => {
   return (
-    <SessionProvider>
-      <PetsPage/>
-    </SessionProvider>
+    <SearcProvider>
+      <PetsMain/>
+    </SearcProvider>
   )
 }
 

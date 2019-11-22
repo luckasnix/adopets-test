@@ -1,1 +1,0 @@
-export const TOOGLE_TOKEN = 'TOOGLE_TOKEN'
