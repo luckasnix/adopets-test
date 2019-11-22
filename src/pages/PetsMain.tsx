@@ -1,5 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { Suspense, lazy, useEffect } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import PetsHeader from './containers/PetsHeader'
+
+const PetsRegister = lazy(() => import('./PetsRegister'))
+const PetsHome = lazy(() => import('./PetsHome'))
 
 const PetsMain: React.FunctionComponent = () => {
   async function fetchAccessKey() {
@@ -17,16 +21,8 @@ const PetsMain: React.FunctionComponent = () => {
         )
       }
     )
-    .then(
-      (res: Response) => {
-        return res.json()
-      }
-    )
-    .then(
-      (res: any) => {
-        console.log(res.data.access_key)
-      }
-    )
+    .then((res: Response) => res.json())
+    .then((res: any) => { console.log(res.data.access_key) })
   }
   useEffect(
     () => {
@@ -35,9 +31,15 @@ const PetsMain: React.FunctionComponent = () => {
     []
   )
   return (
-    <>
+    <Router>
       <PetsHeader/>
-    </>
+      <Suspense fallback={<h1>Carregando...</h1>}>
+        <Switch>
+          <Route path='/home' component={PetsHome} />
+          <Route component={PetsRegister} />
+        </Switch>
+      </Suspense>
+    </Router>
   )
 }
 

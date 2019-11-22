@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import SearchContext from '../SearchContext'
 import searchReducer from './reducers/searchReducer'
 
-interface SearcProviderProps {
+interface Search {
   children: React.ReactNode;
 }
 
@@ -33,7 +33,7 @@ const initialState = {
   }
 }
 
-const SearcProvider: React.FunctionComponent<SearcProviderProps> = (props) => {
+const SearcProvider: React.FunctionComponent<Search> = (props) => {
   const [searchState, searchDispatch] = useReducer(searchReducer, initialState)
   return (
     <SearchContext.Provider value={{ searchState, searchDispatch }}>

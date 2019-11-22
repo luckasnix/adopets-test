@@ -3,33 +3,36 @@ import SearchContext from '../../contexts/SearchContext'
 import * as searchActions from '../../contexts/providers/reducers/actions/searchActions'
 
 const PetsForm: React.FunctionComponent = () => {
+  const { searchState, searchDispatch } = useContext(SearchContext)
   // sex selection
   const [sex, setSex] = useState<string>('ALL')
   const handleSexChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setSex(evt.target.value)
+      searchDispatch(searchActions.updateSexParam(evt.target.value))
     },
-    [setSex]
+    [setSex, searchDispatch]
   )
   // size selection
   const [size, setSize] = useState<string>('ALL')
   const handleSizeChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setSize(evt.target.value)
+      searchDispatch(searchActions.updateSizeParam(evt.target.value))
     },
-    [setSize]
+    [setSize, searchDispatch]
   )
   // age selection
   const [age, setAge] = useState<string>('ALL')
   const handleAgeChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setAge(evt.target.value)
+      searchDispatch(searchActions.updateAgeParam(evt.target.value))
     },
-    [setAge]
+    [setAge, searchDispatch]
   )
   // submit form
-  const { searchState, searchDispatch } = useContext(SearchContext)
-  async function petSearch(token: string) {
+   const petSearch = async(token: string) => {
     await fetch(
       'https://test.adopets.app/v1/pet/search',
       {
@@ -41,23 +44,15 @@ const PetsForm: React.FunctionComponent = () => {
         body: JSON.stringify(searchState)
       }
     )
-    .then(
-      (res) => {
-        return res.json()
-      }
-    )
-    .then(
-      (res) => {
-        console.log(res)
-      }
-    )
+    .then((res: Response) => res.json())
+    .then((res: any) => { console.log(res) })
   }
   const handleSearch = useCallback(
     (evt: React.FormEvent) => {
       evt.preventDefault()
-      searchDispatch(searchActions.addSearchParams({ sex, size, age }))
+      petSearch('token')
     },
-    [sex, size, age]
+    []
   )
   return (
     <form onSubmit={handleSearch}>
@@ -76,7 +71,7 @@ const PetsForm: React.FunctionComponent = () => {
           <option value='S'>Small</option>
           <option value='M'>Medium</option>
           <option value='L'>Large</option>
-          <option value='XL'>Extra large</option>
+          <option value='XL'>Extra Large</option>
         </select>
       </div>
       <div>

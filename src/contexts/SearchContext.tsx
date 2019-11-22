@@ -1,5 +1,5 @@
 import { createContext } from 'react'
 
-const SearchContext = createContext<any | null>(null)
+const SearchContext = createContext<any>(null)
 
 export default SearchContext

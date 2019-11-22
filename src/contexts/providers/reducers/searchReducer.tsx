@@ -33,26 +33,32 @@ interface State {
 interface Action {
   type: string;
   payload: {
-    sex: string;
-    size: string;
-    age: string;
+    sexKey?: string;
+    sizeKey?: string;
+    ageKey?: string;
   }
 }
 
 function searchReducer(state: State, action: Action) {
   switch(action.type) {
-    case searchTypes.UPDADE_SEARCH_PARAMS:
-      let searchParams = {}
-      if(action.payload.sex !== 'ALL') {
-        searchParams = {...searchParams, sex_key: action.payload.sex }
+    case searchTypes.UPDATE_SEX_PARAM:
+      if(action.payload.sexKey === 'ALL') {
+        return state
+      } else {
+        return {...state, sex_key: action.payload.sexKey }
       }
-      if(action.payload.size !== 'ALL') {
-        searchParams = {...searchParams, size_key: action.payload.size }
+    case searchTypes.UPDATE_SIZE_PARAM:
+      if(action.payload.sizeKey === 'ALL') {
+        return state
+      } else {
+        return {...state, size_key: action.payload.sizeKey }
       }
-      if(action.payload.age !== 'ALL') {
-        searchParams = {...searchParams, age_key: action.payload.age }
+    case searchTypes.UPDATE_AGE_PARAM:
+      if(action.payload.ageKey === 'ALL') {
+        return state
+      } else {
+        return {...state, age_key: action.payload.ageKey }
       }
-      return { ...state, ...searchParams }
     default:
       return state
   }

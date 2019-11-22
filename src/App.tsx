@@ -1,12 +1,12 @@
 import React from 'react'
-import SearcProvider from './contexts/providers/SearcProvider'
+import SearchProvider from './contexts/providers/SearchProvider'
 import PetsMain from './pages/PetsMain'
 
 const App: React.FC = () => {
   return (
-    <SearcProvider>
+    <SearchProvider>
       <PetsMain/>
-    </SearcProvider>
+    </SearchProvider>
   )
 }
 
