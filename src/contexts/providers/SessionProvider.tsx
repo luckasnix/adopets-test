@@ -1,12 +1,12 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, ReactNode } from 'react'
 import SessionContext from '../SessionContext'
 import sessionReducer from './reducers/sessionReducer'
 
-interface prosIntf {
-  children: any;
+interface SessionProviderProps {
+  children: ReactNode;
 }
 
-function SessionProvider(props: prosIntf) {
+const SessionProvider: React.FC<SessionProviderProps> = (props) => {
   const [state, dispatch] = useReducer(sessionReducer, { token: '' })
   return (
     <SessionContext.Provider value={{ state, dispatch }}>
