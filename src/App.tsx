@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import SearchProvider from './contexts/providers/SearchProvider'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import PetsLoader from './ui/PetsLoader'
+import PetsLoader from './ui/PetsLoader/PetsLoader'
 
 const PetsMain = lazy(() => import('./pages/PetsMain/PetsMain'))
 const PetsHome = lazy(() => import('./pages/PetsHome/PetsHome'))

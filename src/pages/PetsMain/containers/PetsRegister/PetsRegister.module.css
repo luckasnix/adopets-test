@@ -10,3 +10,20 @@
   align-content: center;
   background-color: #ce3f71;
 }
+.page form {
+  padding: 20px 32px;
+  border-radius: 10px;
+  background-color: #f6f9fa;
+}
+.page form button {
+  width: 100%;
+  height: auto;
+  margin: 6px 0px;
+  padding: 4px;
+  font-size: 18px;
+  color: #f6f9fa;
+  background-color: #ce3f71;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

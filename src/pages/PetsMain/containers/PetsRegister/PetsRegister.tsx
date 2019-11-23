@@ -1,4 +1,6 @@
 import React, { useCallback } from 'react'
+import { withRouter } from 'react-router-dom'
+import PetsInput from './components/PetsInput'
 import styles from './PetsRegister.module.css'
 
 const userEmail = 'usuario-test@adopets.com'
@@ -44,18 +46,12 @@ const PetsRegister: React.FunctionComponent<any> = (props) => {
   return (
     <div className={styles.page}>
       <form onSubmit={handleUserSignIn}>
-        <div>
-          <label htmlFor='input-email'>E-mail: </label>
-          <input id='input-email' type='email' defaultValue={userEmail} />
-        </div>
-        <div>
-          <label htmlFor='input-password'>Password: </label>
-          <input id='input-password' type='password' defaultValue={userPassword} />
-        </div>
+        <PetsInput id='input-email' type='email' label='E-mail:' value={userEmail}/>
+        <PetsInput id='input-password' type='password' label='Password:' value={userPassword}/>
         <button type='submit'>Sign In</button>
       </form>
     </div>
   )
 }
 
-export default PetsRegister
+export default withRouter(PetsRegister)

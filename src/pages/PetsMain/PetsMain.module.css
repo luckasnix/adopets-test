@@ -1,7 +1,4 @@
 .page {
-  position: absolute;
-  top: 80px;
-  left: 0px;
   width: 100vw;
   height: auto;
   min-height: calc(100vh - 80px);
