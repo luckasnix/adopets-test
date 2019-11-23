@@ -1,6 +1,6 @@
 import React from 'react'
-import PetsForm from './containers/PetsForm'
 import { RouteComponentProps } from 'react-router-dom'
+import PetsForm from './containers/PetsForm'
 import styles from './PetsHome.module.css'
 
 const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {

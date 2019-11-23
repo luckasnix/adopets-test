@@ -1,11 +1,10 @@
 import React, { useCallback } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 import styles from './PetsRegister.module.css'
 
 const userEmail = 'usuario-test@adopets.com'
 const userPassword = '123123'
 
-const PetsRegister: React.FunctionComponent<RouteComponentProps> = (props) => {
+const PetsRegister: React.FunctionComponent<any> = (props) => {
   const registerUser = useCallback(
     async (token: string) => {
       await fetch(
@@ -38,9 +37,9 @@ const PetsRegister: React.FunctionComponent<RouteComponentProps> = (props) => {
     (evt: React.FormEvent) => {
       console.log('Form submit')
       evt.preventDefault()
-      registerUser(props.location.state.accessKey)
+      registerUser(props.token)
     },
-    [registerUser, props.location]
+    [registerUser, props.token]
   )
   return (
     <div className={styles.page}>

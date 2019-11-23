@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useContext } from 'react'
-import SearchContext from '../../contexts/SearchContext'
-import * as searchActions from '../../contexts/providers/reducers/actions/searchActions'
+import SearchContext from '../../../contexts/SearchContext'
+import * as searchActions from '../../../contexts/providers/reducers/actions/searchActions'
 
 const PetsForm: React.FunctionComponent<any> = (props) => {
   const { searchState, searchDispatch } = useContext(SearchContext)

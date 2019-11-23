@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
-import Loader from '../ui/Loader'
+import PetsRegister from './containers/PetsRegister/PetsRegister'
+import PetsLoader from '../../ui/PetsLoader'
 import styles from './PetsMain.module.css'
 
 const apiKey: string = '4bdafbc5-c2cb-4a5a-8932-3bd929de4f18'
 
-const PetsMain: React.FunctionComponent<RouteComponentProps> = (props) => {
+const PetsMain: React.FunctionComponent = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [accessKey, setAccessKey] = useState<string>('')
   const fetchAccessKey = useCallback(
@@ -34,14 +34,13 @@ const PetsMain: React.FunctionComponent<RouteComponentProps> = (props) => {
     () => {
       if(accessKey.length) {
         setIsLoading(false)
-        props.history.push('/register', { accessKey })
       }
     },
-    [accessKey, props.history]
+    [accessKey]
   )
   return (
     <main className={styles.page}>
-      {isLoading ? <Loader/> : null}
+      {isLoading ? <PetsLoader/> : <PetsRegister token={accessKey}/>}
     </main>
   )
 }
