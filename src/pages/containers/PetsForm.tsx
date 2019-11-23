@@ -2,7 +2,7 @@ import React, { useState, useCallback, useContext } from 'react'
 import SearchContext from '../../contexts/SearchContext'
 import * as searchActions from '../../contexts/providers/reducers/actions/searchActions'
 
-const PetsForm: React.FunctionComponent = () => {
+const PetsForm: React.FunctionComponent<any> = (props) => {
   const { searchState, searchDispatch } = useContext(SearchContext)
   // sex selection
   const [sex, setSex] = useState<string>('ALL')
@@ -32,27 +32,31 @@ const PetsForm: React.FunctionComponent = () => {
     [setAge, searchDispatch]
   )
   // submit form
-   const petSearch = async(token: string) => {
-    await fetch(
-      'https://test.adopets.app/v1/pet/search',
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(searchState)
-      }
-    )
-    .then((res: Response) => res.json())
-    .then((res: any) => { console.log(res) })
-  }
+   const petSearch = useCallback(
+    async(token: string) => {
+      await fetch(
+        'https://test.adopets.app/v1/pet/search',
+        {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(searchState)
+        }
+      )
+      .then((res: Response) => res.json())
+      .then((res: any) => { console.log(res) })
+    },
+    [searchState]
+   )
   const handleSearch = useCallback(
     (evt: React.FormEvent) => {
       evt.preventDefault()
-      petSearch('token')
+      petSearch(props.token)
+      console.log(searchState)
     },
-    []
+    [props.token]
   )
   return (
     <form onSubmit={handleSearch}>
