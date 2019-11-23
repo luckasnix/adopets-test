@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useContext } from 'react'
-import SearchContext from '../../../contexts/SearchContext'
-import * as searchActions from '../../../contexts/providers/reducers/actions/searchActions'
+import PetsSelect from './components/PetsSelect'
+import SearchContext from '../../../../contexts/SearchContext'
+import * as searchActions from '../../../../contexts/providers/reducers/actions/searchActions'
 
-const PetsForm: React.FunctionComponent<any> = (props) => {
+const PetsParams: React.FunctionComponent<any> = (props) => {
   const { searchState, searchDispatch } = useContext(SearchContext)
   // sex selection
   const [sex, setSex] = useState<string>('ALL')
@@ -60,37 +61,46 @@ const PetsForm: React.FunctionComponent<any> = (props) => {
   )
   return (
     <form onSubmit={handleSearch}>
-      <div>
-        <label htmlFor='sex-select'>Sex: </label>
-        <select id='sex-select' value={sex} onChange={handleSexChange}>
-          <option value='ALL'>All</option>
-          <option value='MALE'>Male</option>
-          <option value='FEMALE'>Female</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor='size-select'>Size: </label>
-        <select id='size-select' value={size} onChange={handleSizeChange}>
-          <option value='ALL'>All</option>
-          <option value='S'>Small</option>
-          <option value='M'>Medium</option>
-          <option value='L'>Large</option>
-          <option value='XL'>Extra Large</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor='age-select'>Age: </label>
-        <select id='age-select' value={age} onChange={handleAgeChange}>
-          <option value='ALL'>All</option>
-          <option value='BABY'>Baby</option>
-          <option value='YOUNG'>Young</option>
-          <option value='ADULT'>Adult</option>
-          <option value='SENIOR'>Senior</option>
-        </select>
-      </div>
+      <PetsSelect
+        id='sex-select'
+        label='Sex: '
+        value={sex}
+        changed={handleSexChange}
+        options={[
+          {value: 'ALL', displayedValue: 'All'},
+          {value: 'MALE', displayedValue: 'Male'},
+          {value: 'FEMALE', displayedValue: 'Female'}
+        ]}
+      />
+      <PetsSelect
+        id='size-select'
+        label='Size: '
+        value={size}
+        changed={handleSizeChange}
+        options={[
+          {value: 'ALL', displayedValue: 'All'},
+          {value: 'S', displayedValue: 'Small'},
+          {value: 'M', displayedValue: 'Medium'},
+          {value: 'L', displayedValue: 'Large'},
+          {value: 'XL', displayedValue: 'Extra Large'}
+        ]}
+      />
+      <PetsSelect
+        id='age-select'
+        label='Age: '
+        value={age}
+        changed={handleAgeChange}
+        options={[
+          {value: 'ALL', displayedValue: 'All'},
+          {value: 'BABY', displayedValue: 'Baby'},
+          {value: 'YOUNG', displayedValue: 'Young'},
+          {value: 'ADULT', displayedValue: 'Adult'},
+          {value: 'SENIOR', displayedValue: 'Senior'}
+        ]}
+      />
       <button type='submit'>Search</button>
     </form>
   )
 }
 
-export default PetsForm
+export default PetsParams
