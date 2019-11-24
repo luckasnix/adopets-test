@@ -32,9 +32,17 @@ const PetsParams: React.FunctionComponent<any> = (props) => {
     },
     [setAge, searchDispatch]
   )
+  // sort selection
+  const [sort, setSort] = useState<string>('RANDOM')
+  const handleSortChange = useCallback(
+    (evt: React.ChangeEvent<HTMLSelectElement>) => {
+      setSort(evt.target.value)
+    },
+    [setSort]
+  )
   // submit form
-   const petSearch = useCallback(
-    async(token: string) => {
+  const petSearch = useCallback(
+    async(token: string, body: any) => {
       await fetch(
         'https://test.adopets.app/v1/pet/search',
         {
@@ -43,21 +51,21 @@ const PetsParams: React.FunctionComponent<any> = (props) => {
             'Content-type': 'application/json',
             Authorization: `Bearer ${token}`
           },
-          body: JSON.stringify(searchState)
+          body: JSON.stringify(body)
         }
       )
       .then((res: Response) => res.json())
       .then((res: any) => { console.log(res) })
     },
-    [searchState]
+    []
    )
   const handleSearch = useCallback(
     (evt: React.FormEvent) => {
       evt.preventDefault()
-      petSearch(props.token)
+      petSearch(props.token, searchState)
       console.log(searchState)
     },
-    [props.token]
+    [props.token, searchState]
   )
   return (
     <form onSubmit={handleSearch}>
@@ -96,6 +104,17 @@ const PetsParams: React.FunctionComponent<any> = (props) => {
           {value: 'YOUNG', displayedValue: 'Young'},
           {value: 'ADULT', displayedValue: 'Adult'},
           {value: 'SENIOR', displayedValue: 'Senior'}
+        ]}
+      />
+      <PetsSelect
+        id='sort-select'
+        label='Sort: '
+        value={sort}
+        changed={handleSortChange}
+        options={[
+          {value: 'Random', displayedValue: 'Random'},
+          {value: 'name', displayedValue: 'From A to Z'},
+          {value: '-name', displayedValue: 'From Z to A'}
         ]}
       />
       <button type='submit'>Search</button>

@@ -45,19 +45,28 @@ function searchReducer(state: State, action: Action) {
       if(action.payload.sexKey === 'ALL') {
         return state
       } else {
-        return {...state, sex_key: action.payload.sexKey }
+        let newState = {...state}
+        newState.search = {...state.search}
+        newState.search.sex_key = action.payload.sexKey
+        return newState
       }
     case searchTypes.UPDATE_SIZE_PARAM:
       if(action.payload.sizeKey === 'ALL') {
         return state
       } else {
-        return {...state, size_key: action.payload.sizeKey }
+        let newState = {...state}
+        newState.search = {...state.search}
+        newState.search.size_key = action.payload.sizeKey
+        return newState
       }
     case searchTypes.UPDATE_AGE_PARAM:
       if(action.payload.ageKey === 'ALL') {
         return state
       } else {
-        return {...state, age_key: action.payload.ageKey }
+        let newState = {...state}
+        newState.search = {...state.search}
+        newState.search.age_key = action.payload.ageKey
+        return newState
       }
     default:
       return state

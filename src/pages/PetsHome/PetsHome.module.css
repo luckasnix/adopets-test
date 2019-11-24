@@ -1,5 +1,9 @@
 .page {
   width: 100vw;
-  height: 100vh;
+  height: auto;
+  min-height: calc(100vh - 80px);
+  padding: 40px;
+  display: grid;
+  justify-content: center;
   background-color: #ce3f71;
 }
