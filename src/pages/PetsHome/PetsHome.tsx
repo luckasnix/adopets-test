@@ -2,51 +2,40 @@ import React, { useState, useCallback } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import PetsParams from './containers/PetsParams/PetsParams'
 import PetsHeader from '../../ui/PetsHeader/PetsHeader'
+import PetsData from './containers/PetsData/PetsData'
 import styles from './PetsHome.module.css'
 
-interface Data {
-  status: number;
-  code: number;
-  message: string | null;
-  data: {
-    limit: number;
-    count: number;
-    offset: number;
-    page: number;
-    pages: number;
-    return: {
-      id: number;
-      uuid: string;
-      name: string;
-      sex_key: string;
-      size_key: string;
-      age_key: string;
-      price: string;
-      payment_model_key: string;
-      status_key: string;
-      created_date: string;
-      custom_code: string | null;
-      branch_id: number;
-      branch: {
-        id: number;
-        uuid: string;
-      };
-      breed_primary_id: number;
-      breed_primary: {
-        id: number;
-        name: string;
-      };
-      specie_id: number;
-      specie: {
-        id: number;
-        name: string;
-      };
-    }[];
-  }
-}
+type FetchedData = {
+  id: number;
+  uuid: string;
+  name: string;
+  sex_key: string;
+  size_key: string;
+  age_key: string;
+  price: string;
+  payment_model_key: string;
+  status_key: string;
+  created_date: string;
+  custom_code: string | null;
+  branch_id: number;
+  branch: {
+    id: number;
+    uuid: string;
+  };
+  breed_primary_id: number;
+  breed_primary: {
+    id: number;
+    name: string;
+  };
+  specie_id: number;
+  specie: {
+    id: number;
+    name: string;
+  };
+}[];
 
 const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
-  const [data, setData] = useState<Data | null>(null)
+  const [fetchedData, setFetchedData] = useState<any>(null)
   const petSearch = useCallback(
     async(token: string, body: any) => {
       await fetch(
@@ -61,7 +50,12 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
         }
       )
       .then((res: Response) => res.json())
-      .then((res: any) => { console.log(res) })
+      .then(
+        (res: any) => {
+          console.log(res.data.result)
+          setFetchedData(res.data.result)
+        }
+      )
     },
     []
   )
@@ -73,6 +67,7 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
           search={petSearch}
           token={props.location.state.accessKey}
         />
+        <PetsData data={fetchedData}/>
       </div>
     </>
   )

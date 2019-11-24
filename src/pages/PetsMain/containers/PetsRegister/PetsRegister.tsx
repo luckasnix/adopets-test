@@ -21,14 +21,11 @@ const PetsRegister: React.FunctionComponent<any> = (props) => {
       )
       .then(
         (res: Response) => {
-          console.log('Primeiro then')
           return res.json()
         }
       )
       .then(
         (res: any) => {
-          console.log('Segundo then')
-          console.log(res)
           props.history.push('/home', { accessKey: res.data.access_key })
         }
       )
@@ -37,7 +34,6 @@ const PetsRegister: React.FunctionComponent<any> = (props) => {
   )
   const handleUserSignIn = useCallback(
     (evt: React.FormEvent) => {
-      console.log('Form submit')
       evt.preventDefault()
       registerUser(props.token)
     },
