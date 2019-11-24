@@ -43,31 +43,13 @@ const PetsParams: React.FunctionComponent<any> = (props) => {
     [setSort, searchDispatch]
   )
   // submit form
-  const petSearch = useCallback(
-    async(token: string, body: any) => {
-      await fetch(
-        'https://test.adopets.app/v1/pet/search',
-        {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify(body)
-        }
-      )
-      .then((res: Response) => res.json())
-      .then((res: any) => { console.log(res) })
-    },
-    []
-   )
   const handleSearch = useCallback(
     (evt: React.FormEvent) => {
       evt.preventDefault()
-      petSearch(props.token, searchState)
+      props.search(props.token, searchState)
       console.log(searchState)
     },
-    [petSearch, props.token, searchState]
+    [props, searchState]
   )
   return (
     <form className={styles.form} onSubmit={handleSearch}>
