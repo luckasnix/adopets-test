@@ -26,3 +26,12 @@ export function updateAgeParam(age: string) {
     }
   }
 }
+
+export function updateSortParam(sort: string) {
+  return {
+    type: searchTypes.UPDATE_SORT_PARAM,
+    payload: {
+      sortKey: sort
+    }
+  }
+}

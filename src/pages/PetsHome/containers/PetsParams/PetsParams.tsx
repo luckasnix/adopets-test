@@ -37,8 +37,9 @@ const PetsParams: React.FunctionComponent<any> = (props) => {
   const handleSortChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setSort(evt.target.value)
+      searchDispatch(searchActions.updateSortParam(evt.target.value))
     },
-    [setSort]
+    [setSort, searchDispatch]
   )
   // submit form
   const petSearch = useCallback(

@@ -36,38 +36,61 @@ interface Action {
     sexKey?: string;
     sizeKey?: string;
     ageKey?: string;
+    sortKey?: string;
   }
 }
 
 function searchReducer(state: State, action: Action) {
   switch(action.type) {
     case searchTypes.UPDATE_SEX_PARAM:
+      let sexState = {...state}
+      sexState.search = {...state.search}
       if(action.payload.sexKey === 'ALL') {
-        return state
+        if(sexState.search.sex_key) {
+          delete sexState.search.sex_key
+        }
+        return sexState
       } else {
-        let newState = {...state}
-        newState.search = {...state.search}
-        newState.search.sex_key = action.payload.sexKey
-        return newState
+        sexState.search.sex_key = action.payload.sexKey
+        return sexState
       }
     case searchTypes.UPDATE_SIZE_PARAM:
+      let sizeState = {...state}
+      sizeState.search = {...state.search}
       if(action.payload.sizeKey === 'ALL') {
-        return state
+        if(sizeState.search.size_key) {
+          delete sizeState.search.size_key
+        }
+        return sizeState
       } else {
-        let newState = {...state}
-        newState.search = {...state.search}
-        newState.search.size_key = action.payload.sizeKey
-        return newState
+        sizeState.search.size_key = action.payload.sizeKey
+        return sizeState
       }
     case searchTypes.UPDATE_AGE_PARAM:
+      let ageState = {...state}
+      ageState.search = {...state.search}
       if(action.payload.ageKey === 'ALL') {
-        return state
+        if(ageState.search.age_key) {
+          delete ageState.search.age_key
+        }
+        return ageState
       } else {
-        let newState = {...state}
-        newState.search = {...state.search}
-        newState.search.age_key = action.payload.ageKey
-        return newState
+        ageState.search.age_key = action.payload.ageKey
+        return ageState
       }
+    case searchTypes.UPDATE_SORT_PARAM:
+      let sortState = {...state}
+      sortState.options = {...state.options}
+      sortState.options.sort = [...state.options.sort]
+      if(action.payload.sortKey === 'Random') {
+        sortState.options.sort = []
+      } else if(action.payload.sortKey) {
+        if(sortState.options.sort.length > 0) {
+          sortState.options.sort = []
+        }
+        sortState.options.sort.push(action.payload.sortKey)
+      }
+      return sortState
     default:
       return state
   }
