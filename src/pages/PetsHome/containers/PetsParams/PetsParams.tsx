@@ -34,7 +34,7 @@ const PetsParams: React.FunctionComponent<any> = (props) => {
     [setAge, searchDispatch]
   )
   // sort selection
-  const [sort, setSort] = useState<string>('RANDOM')
+  const [sort, setSort] = useState<string>('Random')
   const handleSortChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setSort(evt.target.value)
