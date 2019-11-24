@@ -2,6 +2,7 @@ import React, { useState, useCallback, useContext } from 'react'
 import PetsSelect from './components/PetsSelect'
 import SearchContext from '../../../../contexts/SearchContext'
 import * as searchActions from '../../../../contexts/providers/reducers/actions/searchActions'
+import styles from './PetsParams.module.css'
 
 const PetsParams: React.FunctionComponent<any> = (props) => {
   const { searchState, searchDispatch } = useContext(SearchContext)
@@ -66,10 +67,10 @@ const PetsParams: React.FunctionComponent<any> = (props) => {
       petSearch(props.token, searchState)
       console.log(searchState)
     },
-    [props.token, searchState]
+    [petSearch, props.token, searchState]
   )
   return (
-    <form onSubmit={handleSearch}>
+    <form className={styles.form} onSubmit={handleSearch}>
       <PetsSelect
         id='sex-select'
         label='Sex: '

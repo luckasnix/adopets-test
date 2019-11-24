@@ -1,0 +1,18 @@
+.input {
+  margin: 6px;
+  display: inline;
+}
+.input label {
+  margin: 4px 0px;
+  font-size: 16px;
+  color: #50505a;
+}
+.input select {
+  margin: 4px 0px;
+  padding: 4px;
+  font-size: 16px;
+  color: #7f7f87;
+  background-color: #dfdfe1;
+  border: 1px solid #7f7f87;
+  border-radius: 4px;
+}

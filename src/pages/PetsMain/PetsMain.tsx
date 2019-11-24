@@ -30,7 +30,14 @@ const PetsMain: React.FunctionComponent = () => {
     },
     []
    )
-  useEffect(() => { fetchAccessKey() }, [])
+  useEffect(
+    () => {
+      if(!accessKey.length) {
+        fetchAccessKey()
+      }
+    },
+    [accessKey, fetchAccessKey]
+  )
   useEffect(
     () => {
       if(accessKey.length) {
