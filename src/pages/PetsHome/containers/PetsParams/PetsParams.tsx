@@ -4,13 +4,8 @@ import SearchContext from '../../../../contexts/SearchContext'
 import * as searchActions from '../../../../contexts/providers/reducers/actions/searchActions'
 import styles from './PetsParams.module.css'
 
-interface Props {
-  searched: (token: string, body: any) => Promise<void>;
-  token: string;
-}
-
-const PetsParams: React.FunctionComponent<Props> = (props) => {
-  const { searchState, searchDispatch } = useContext(SearchContext)
+const PetsParams: React.FunctionComponent = () => {
+  const { searchDispatch } = useContext(SearchContext)
   // sex selection
   const [sex, setSex] = useState<string>('ALL')
   const handleSexChange = useCallback(
@@ -47,16 +42,8 @@ const PetsParams: React.FunctionComponent<Props> = (props) => {
     },
     [setSort, searchDispatch]
   )
-  // using the state in context to submit form
-  const handleSearch = useCallback(
-    (evt: React.FormEvent) => {
-      evt.preventDefault()
-      props.searched(props.token, searchState)
-    },
-    [props, searchState]
-  )
   return (
-    <form className={styles.form} onSubmit={handleSearch}>
+    <form className={styles.form}>
       <PetsSelect
         id='sex-select'
         label='Sex: '
@@ -105,7 +92,6 @@ const PetsParams: React.FunctionComponent<Props> = (props) => {
           {value: '-name', displayedValue: 'From Z to A'}
         ]}
       />
-      <button type='submit'>Search</button>
     </form>
   )
 }

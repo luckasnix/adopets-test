@@ -103,6 +103,7 @@ function searchReducer(state: State, action: Action) {
       if (action.payload.pageKey) {
         pageState.options.page = action.payload.pageKey
       }
+      return pageState
     default:
       return state
   }

@@ -1,12 +1,14 @@
-import React, { useState, useCallback } from 'react'
+import React, { useContext, useState, useEffect, useCallback } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import PetsHeader from '../../ui/PetsHeader/PetsHeader'
 import PetsParams from './containers/PetsParams/PetsParams'
 import PetsData from './containers/PetsData/PetsData'
 import PetsPages from './containers/PetsPages/PetsPages'
+import SearchContext from '../../contexts/SearchContext'
 import styles from './PetsHome.module.css'
 
 const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
+  const { searchState } = useContext(SearchContext)
   const [fetchedData, setFetchedData] = useState<any>(null)
   const petSearch = useCallback(
     async(token: string, body: any) => {
@@ -30,20 +32,19 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
     },
     []
   )
+  useEffect(
+    () => {
+      petSearch(props.location.state.accessKey, searchState)
+    },
+    [searchState, petSearch, props.location]
+  )
   return (
     <>
       <PetsHeader/>
       <div className={styles.page}>
-        <PetsParams
-          searched={petSearch}
-          token={props.location.state.accessKey}
-        />
-        <PetsData data={fetchedData}/>
-        <PetsPages
-          data={fetchedData}
-          token={props.location.state.accessKey}
-          clicked={() => { console.log('Clicou') }}
-        />
+        <PetsParams/>
+        <PetsData data={fetchedData} />
+        <PetsPages data={fetchedData} />
       </div>
     </>
   )
