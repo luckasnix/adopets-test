@@ -47,6 +47,9 @@ function searchReducer(state: State, action: Action) {
       // copying the state to overwrite it with new state
       let sexState = {...state}
       sexState.search = {...state.search}
+      sexState.options = {...state.options}
+      // we should ensure that the application always returns to first page in case of new query
+      sexState.options.page = 1
       // if 'sexKey' is equal to 'all', we shouldn't write it in the state
       if(action.payload.sexKey === 'ALL') {
         if(sexState.search.sex_key) {
@@ -63,6 +66,8 @@ function searchReducer(state: State, action: Action) {
     case searchTypes.UPDATE_SIZE_PARAM:
       let sizeState = {...state}
       sizeState.search = {...state.search}
+      sizeState.options = {...state.options}
+      sizeState.options.page = 1
       if(action.payload.sizeKey === 'ALL') {
         if(sizeState.search.size_key) {
           delete sizeState.search.size_key
@@ -75,6 +80,8 @@ function searchReducer(state: State, action: Action) {
     case searchTypes.UPDATE_AGE_PARAM:
       let ageState = {...state}
       ageState.search = {...state.search}
+      ageState.options = {...state.options}
+      ageState.options.page = 1
       if(action.payload.ageKey === 'ALL') {
         if(ageState.search.age_key) {
           delete ageState.search.age_key
