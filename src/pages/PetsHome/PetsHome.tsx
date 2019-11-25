@@ -34,6 +34,7 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
   )
   useEffect(
     () => {
+      console.log('Segunda chave:', props.location.state.accessKey)
       petSearch(props.location.state.accessKey, searchState)
     },
     [searchState, petSearch, props.location]

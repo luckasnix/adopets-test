@@ -41,6 +41,7 @@ const PetsMain: React.FunctionComponent = () => {
   useEffect(
     () => {
       if(accessKey.length) {
+        console.log('Primeira chave:', accessKey)
         setIsLoading(false)
       }
     },
