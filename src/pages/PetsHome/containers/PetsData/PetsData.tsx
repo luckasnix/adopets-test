@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './PetsData.module.css'
 
 interface Data {
   data: {
@@ -33,14 +34,22 @@ interface Data {
 
 const PetsData: React.FunctionComponent<Data | null> = (props) => {
   if(props.data === null || props.data.length === 0) {
-    return <h1>Nenhum dado a ser exibido</h1>
+    return (
+      <div className={styles.noList}>
+        <p>No data to display</p>
+      </div>
+    )
   } else {
     return (
-      <ul>
+      <ul className={styles.list}>
         {
           props.data.map((cur) => {
             return (
-              <li key={cur.id}>{cur.name}</li>
+              <li key={cur.id}>
+                <p><strong>{cur.name}</strong></p>
+                <p>{cur.breed_primary.name}</p>
+                <p>$ {cur.price}</p>
+              </li>
             )
           })
         }

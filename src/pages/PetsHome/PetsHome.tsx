@@ -5,35 +5,6 @@ import PetsHeader from '../../ui/PetsHeader/PetsHeader'
 import PetsData from './containers/PetsData/PetsData'
 import styles from './PetsHome.module.css'
 
-type FetchedData = {
-  id: number;
-  uuid: string;
-  name: string;
-  sex_key: string;
-  size_key: string;
-  age_key: string;
-  price: string;
-  payment_model_key: string;
-  status_key: string;
-  created_date: string;
-  custom_code: string | null;
-  branch_id: number;
-  branch: {
-    id: number;
-    uuid: string;
-  };
-  breed_primary_id: number;
-  breed_primary: {
-    id: number;
-    name: string;
-  };
-  specie_id: number;
-  specie: {
-    id: number;
-    name: string;
-  };
-}[];
-
 const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
   const [fetchedData, setFetchedData] = useState<any>(null)
   const petSearch = useCallback(
