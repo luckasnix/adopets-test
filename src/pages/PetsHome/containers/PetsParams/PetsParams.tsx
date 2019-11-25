@@ -47,7 +47,7 @@ const PetsParams: React.FunctionComponent<Props> = (props) => {
     },
     [setSort, searchDispatch]
   )
-  // submit form
+  // using the state in context to submit form
   const handleSearch = useCallback(
     (evt: React.FormEvent) => {
       evt.preventDefault()

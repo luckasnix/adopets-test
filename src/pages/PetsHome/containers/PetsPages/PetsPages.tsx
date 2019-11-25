@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext, useCallback } from 'react'
+import SearchContext from '../../../../contexts/SearchContext'
 import styles from './PetsPages.module.css'
 
 interface Data {
@@ -38,9 +39,19 @@ interface Data {
     }[];
   };
   clicked: any;
+  token: string;
 }
 
 const PetsPages: React.FunctionComponent<Data | null> = (props) => {
+  // accessing the context
+  const { searchState, searchDispatch } = useContext(SearchContext)
+  const handlePageChange = useCallback(
+    () => {
+      searchDispatch()
+      // props.clicked(props.token, searchState)
+    },
+    []
+  )
   if(props.data === null || props.data.pages === 0) {
     return null
   } else {
@@ -50,7 +61,7 @@ const PetsPages: React.FunctionComponent<Data | null> = (props) => {
         <li
           key={idx}
           className={props.data.page === idx ? styles.active : ''}
-          onClick={props.clicked}
+          onClick={handlePageChange}
         >{idx}</li>
       )
     }

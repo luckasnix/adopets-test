@@ -37,20 +37,26 @@ interface Action {
     sizeKey?: string;
     ageKey?: string;
     sortKey?: string;
+    pageKey?: number;
   }
 }
 
 function searchReducer(state: State, action: Action) {
   switch(action.type) {
     case searchTypes.UPDATE_SEX_PARAM:
+      // copying the state to overwrite it with new state
       let sexState = {...state}
       sexState.search = {...state.search}
+      // if 'sexKey' is equal to 'all', we shouldn't write it in the state
       if(action.payload.sexKey === 'ALL') {
         if(sexState.search.sex_key) {
+          // if the 'sex_key' key already exists in the state, we should delete it
           delete sexState.search.sex_key
         }
+        // we should return a new state to overwrite the old state
         return sexState
       } else {
+        // if 'sexKey' is not equal to 'all', we should write it in the state
         sexState.search.sex_key = action.payload.sexKey
         return sexState
       }
@@ -91,6 +97,12 @@ function searchReducer(state: State, action: Action) {
         sortState.options.sort.push(action.payload.sortKey)
       }
       return sortState
+    case searchTypes.UPDATE_PAGE_PARAM:
+      let pageState = {...state}
+      pageState.options = {...state.options}
+      if (action.payload.pageKey) {
+        pageState.options.page = action.payload.pageKey
+      }
     default:
       return state
   }

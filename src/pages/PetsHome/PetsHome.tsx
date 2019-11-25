@@ -39,7 +39,11 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
           token={props.location.state.accessKey}
         />
         <PetsData data={fetchedData}/>
-        <PetsPages data={fetchedData} clicked={() => { console.log('Clicou') }}/>
+        <PetsPages
+          data={fetchedData}
+          token={props.location.state.accessKey}
+          clicked={() => { console.log('Clicou') }}
+        />
       </div>
     </>
   )

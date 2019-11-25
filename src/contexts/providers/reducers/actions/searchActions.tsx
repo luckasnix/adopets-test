@@ -35,3 +35,12 @@ export function updateSortParam(sort: string) {
     }
   }
 }
+
+export function updatePageParam(page: number) {
+  return {
+    type: searchTypes.UPDATE_PAGE_PARAM,
+    payload: {
+      pageKey: page
+    }
+  }
+}
