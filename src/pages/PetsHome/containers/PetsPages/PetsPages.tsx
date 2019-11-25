@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './PetsData.module.css'
 
 interface Data {
   data: {
@@ -39,30 +38,28 @@ interface Data {
   };
 }
 
-const PetsData: React.FunctionComponent<Data | null> = (props) => {
-  if(props.data === null || props.data.result.length === 0) {
+const PetsPages: React.FunctionComponent<Data | null> = (props) => {
+  if(props.data === null || props.data.pages === 0) {
     return (
-      <div className={styles.noList}>
-        <p>No data to display</p>
+      <div>
+        <p>No pages</p>
       </div>
     )
   } else {
+    let pageList = []
+    for(let idx = 1; idx <= props.data.pages; idx++) {
+      if(props.data.page === idx) {
+        pageList.push(<li key={idx}>Página atual {idx}</li>)
+      } else {
+        pageList.push(<li key={idx}>Página {idx}</li>)
+      }
+    }
     return (
-      <ul className={styles.list}>
-        {
-          props.data.result.map((cur) => {
-            return (
-              <li key={cur.id}>
-                <p><strong>{cur.name}</strong></p>
-                <p>{cur.breed_primary.name}</p>
-                <p>$ {cur.price}</p>
-              </li>
-            )
-          })
-        }
+      <ul>
+        {pageList}
       </ul>
     )
   }
 }
 
-export default PetsData
+export default PetsPages

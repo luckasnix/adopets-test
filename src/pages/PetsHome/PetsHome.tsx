@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import PetsParams from './containers/PetsParams/PetsParams'
 import PetsHeader from '../../ui/PetsHeader/PetsHeader'
+import PetsParams from './containers/PetsParams/PetsParams'
 import PetsData from './containers/PetsData/PetsData'
+import PetsPages from './containers/PetsPages/PetsPages'
 import styles from './PetsHome.module.css'
 
 const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
@@ -23,8 +24,8 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
       .then((res: Response) => res.json())
       .then(
         (res: any) => {
-          console.log(res.data.result)
-          setFetchedData(res.data.result)
+          console.log(res.data)
+          setFetchedData(res.data)
         }
       )
     },
@@ -39,6 +40,7 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
           token={props.location.state.accessKey}
         />
         <PetsData data={fetchedData}/>
+        <PetsPages data={fetchedData}/>
       </div>
     </>
   )
