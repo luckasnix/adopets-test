@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './PetsPages.module.css'
 
 interface Data {
   data: {
@@ -36,26 +37,25 @@ interface Data {
       };
     }[];
   };
+  clicked: any;
 }
 
 const PetsPages: React.FunctionComponent<Data | null> = (props) => {
   if(props.data === null || props.data.pages === 0) {
-    return (
-      <div>
-        <p>No pages</p>
-      </div>
-    )
+    return null
   } else {
     let pageList = []
     for(let idx = 1; idx <= props.data.pages; idx++) {
-      if(props.data.page === idx) {
-        pageList.push(<li key={idx}>Página atual {idx}</li>)
-      } else {
-        pageList.push(<li key={idx}>Página {idx}</li>)
-      }
+      pageList.push(
+        <li
+          key={idx}
+          className={props.data.page === idx ? styles.active : ''}
+          onClick={props.clicked}
+        >{idx}</li>
+      )
     }
     return (
-      <ul>
+      <ul className={styles.list}>
         {pageList}
       </ul>
     )

@@ -24,7 +24,6 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
       .then((res: Response) => res.json())
       .then(
         (res: any) => {
-          console.log(res.data)
           setFetchedData(res.data)
         }
       )
@@ -36,11 +35,11 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
       <PetsHeader/>
       <div className={styles.page}>
         <PetsParams
-          search={petSearch}
+          searched={petSearch}
           token={props.location.state.accessKey}
         />
         <PetsData data={fetchedData}/>
-        <PetsPages data={fetchedData}/>
+        <PetsPages data={fetchedData} clicked={() => { console.log('Clicou') }}/>
       </div>
     </>
   )

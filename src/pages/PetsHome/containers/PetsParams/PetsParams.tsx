@@ -4,7 +4,12 @@ import SearchContext from '../../../../contexts/SearchContext'
 import * as searchActions from '../../../../contexts/providers/reducers/actions/searchActions'
 import styles from './PetsParams.module.css'
 
-const PetsParams: React.FunctionComponent<any> = (props) => {
+interface Props {
+  searched: (token: string, body: any) => Promise<void>;
+  token: string;
+}
+
+const PetsParams: React.FunctionComponent<Props> = (props) => {
   const { searchState, searchDispatch } = useContext(SearchContext)
   // sex selection
   const [sex, setSex] = useState<string>('ALL')
@@ -46,8 +51,7 @@ const PetsParams: React.FunctionComponent<any> = (props) => {
   const handleSearch = useCallback(
     (evt: React.FormEvent) => {
       evt.preventDefault()
-      props.search(props.token, searchState)
-      console.log(searchState)
+      props.searched(props.token, searchState)
     },
     [props, searchState]
   )
