@@ -5,6 +5,7 @@ import * as searchActions from '../../../../contexts/providers/reducers/actions/
 import styles from './PetsParams.module.css'
 
 const PetsParams: React.FunctionComponent = () => {
+  // accessing the context to get the dispatch function
   const { searchDispatch } = useContext(SearchContext)
   // sex selection
   const [sex, setSex] = useState<string>('ALL')

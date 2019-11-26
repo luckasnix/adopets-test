@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, RouteComponentProps, useHistory } from 'react-router-dom'
 import PetsInput from './components/PetsInput'
 import styles from './PetsRegister.module.css'
 
@@ -7,7 +7,13 @@ import styles from './PetsRegister.module.css'
 const userEmail = 'usuario-test@adopets.com'
 const userPassword = '123123'
 
-const PetsRegister: React.FunctionComponent<any> = (props) => {
+interface Props extends RouteComponentProps {
+  token: string;
+}
+
+const PetsRegister: React.FunctionComponent<Props> = (props) => {
+  // accessing history object
+  let history = useHistory()
   // asynchronous function to accessing the api
   const registerUser = useCallback(
     async (token: string) => {
@@ -29,11 +35,11 @@ const PetsRegister: React.FunctionComponent<any> = (props) => {
       .then(
         (res: any) => {
           // navigating to home page after get the new access key
-          props.history.push('/home', { accessKey: res.data.access_key })
+          history.replace('/home', { accessKey: res.data.access_key })
         }
       )
     },
-    [props.history]
+    [history]
   )
   // function to register the user
   const handleUserSignIn = useCallback(
