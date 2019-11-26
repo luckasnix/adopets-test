@@ -41,6 +41,7 @@ const PetsMain: React.FunctionComponent = () => {
       // fetching data to set access key
       fetchAccessKey()
     },
+    // eslint-disable-next-line
     []
   )
   return (
