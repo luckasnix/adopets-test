@@ -38,14 +38,10 @@ const PetsMain: React.FunctionComponent = () => {
    )
   useEffect(
     () => {
-      // getting access key from local storage
-      let accessKey: string | null = localStorage.getItem('accessKey')
-      if(!accessKey) {
-        // fetching data if there are no access key
-        fetchAccessKey()
-      }
+      // fetching data to set access key
+      fetchAccessKey()
     },
-    [fetchAccessKey]
+    []
   )
   return (
     <>

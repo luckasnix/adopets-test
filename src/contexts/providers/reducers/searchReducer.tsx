@@ -95,6 +95,7 @@ function searchReducer(state: State, action: Action) {
       let sortState = {...state}
       sortState.options = {...state.options}
       sortState.options.sort = [...state.options.sort]
+      sortState.options.page = 1
       if(action.payload.sortKey === 'Random') {
         sortState.options.sort = []
       } else if(action.payload.sortKey) {
