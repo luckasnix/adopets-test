@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
-import { RouteComponentProps, useLocation } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import PetsHeader from '../../ui/PetsHeader/PetsHeader'
 import PetsParams from './containers/PetsParams/PetsParams'
 import PetsData from './containers/PetsData/PetsData'
@@ -10,8 +10,6 @@ import styles from './PetsHome.module.css'
 const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
   // accessing context to get the search object
   const { searchState } = useContext(SearchContext)
-  // accessing location object
-  let location = useLocation()
   // state to store the data fetched from server
   const [fetchedData, setFetchedData] = useState<any>(null)
   // asynchronous function to accessing the api
@@ -41,11 +39,14 @@ const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
   )
   useEffect(
     () => {
-      console.log('Segunda chave:', location.state.accessKey)
+      // getting session key from local storage
+      let sessionKey: string | null = localStorage.getItem('sessionKey')
       // reacting to search object updates and sending it to the server in every change
-      petSearch(location.state.accessKey, searchState)
+      if(sessionKey) {
+        petSearch(sessionKey, searchState)
+      }
     },
-    [searchState, petSearch, location]
+    [petSearch, searchState]
   )
   return (
     <>

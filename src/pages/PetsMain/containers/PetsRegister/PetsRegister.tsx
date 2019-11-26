@@ -7,11 +7,7 @@ import styles from './PetsRegister.module.css'
 const userEmail = 'usuario-test@adopets.com'
 const userPassword = '123123'
 
-interface Props extends RouteComponentProps {
-  token: string;
-}
-
-const PetsRegister: React.FunctionComponent<Props> = (props) => {
+const PetsRegister: React.FunctionComponent<RouteComponentProps> = (props) => {
   // accessing history object
   let history = useHistory()
   // asynchronous function to accessing the api
@@ -34,8 +30,10 @@ const PetsRegister: React.FunctionComponent<Props> = (props) => {
       )
       .then(
         (res: any) => {
+          // setting access key in local storage
+          localStorage.setItem('sessionKey', res.data.access_key)
           // navigating to home page after get the new access key
-          history.replace('/home', { accessKey: res.data.access_key })
+          history.replace('/home')
         }
       )
     },
@@ -45,9 +43,12 @@ const PetsRegister: React.FunctionComponent<Props> = (props) => {
   const handleUserSignIn = useCallback(
     (evt: React.FormEvent) => {
       evt.preventDefault()
-      registerUser(props.token)
+      let accessKey: string | null = localStorage.getItem('accessKey')
+      if(accessKey) {
+        registerUser(accessKey)
+      }
     },
-    [registerUser, props.token]
+    [registerUser]
   )
   return (
     <div className={styles.page}>
