@@ -40,7 +40,7 @@ const PetsMain: React.FunctionComponent = () => {
     () => {
       // getting access key from local storage
       let accessKey: string | null = localStorage.getItem('accessKey')
-      if(accessKey) {
+      if(!accessKey) {
         // fetching data if there are no access key
         fetchAccessKey()
       }

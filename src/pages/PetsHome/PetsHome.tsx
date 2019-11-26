@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 import PetsHeader from '../../ui/PetsHeader/PetsHeader'
 import PetsParams from './containers/PetsParams/PetsParams'
 import PetsData from './containers/PetsData/PetsData'
@@ -7,7 +6,7 @@ import PetsPages from './containers/PetsPages/PetsPages'
 import SearchContext from '../../contexts/SearchContext'
 import styles from './PetsHome.module.css'
 
-const PetsHome: React.FunctionComponent<RouteComponentProps> = (props) => {
+const PetsHome: React.FunctionComponent = () => {
   // accessing context to get the search object
   const { searchState } = useContext(SearchContext)
   // state to store the data fetched from server
