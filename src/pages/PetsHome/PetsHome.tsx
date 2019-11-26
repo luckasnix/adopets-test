@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
 import PetsHeader from '../../ui/PetsHeader/PetsHeader'
+import PetsExit from './containers/PetsExit/PetsExit'
 import PetsParams from './containers/PetsParams/PetsParams'
 import PetsData from './containers/PetsData/PetsData'
 import PetsPages from './containers/PetsPages/PetsPages'
@@ -51,6 +52,7 @@ const PetsHome: React.FunctionComponent = () => {
     <>
       <PetsHeader/>
       <div className={styles.page}>
+        <PetsExit/>
         <PetsParams/>
         <PetsData data={fetchedData} />
         <PetsPages data={fetchedData} />

@@ -1,0 +1,12 @@
+.exit {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  padding: 6px;
+  border: none;
+  border-radius: 10px;
+  background-color: #50505a;
+  font-size: 14px;
+  color: #f6f9fa;
+  cursor: pointer;
+}
