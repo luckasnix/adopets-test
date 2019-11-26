@@ -11,6 +11,7 @@ const PetsParams: React.FunctionComponent = () => {
   const handleSexChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setSex(evt.target.value)
+      // updating the search object stored in context
       searchDispatch(searchActions.updateSexParam(evt.target.value))
     },
     [setSex, searchDispatch]
@@ -20,6 +21,7 @@ const PetsParams: React.FunctionComponent = () => {
   const handleSizeChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setSize(evt.target.value)
+      // updating the search object stored in context
       searchDispatch(searchActions.updateSizeParam(evt.target.value))
     },
     [setSize, searchDispatch]
@@ -29,6 +31,7 @@ const PetsParams: React.FunctionComponent = () => {
   const handleAgeChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setAge(evt.target.value)
+      // updating the search object stored in context
       searchDispatch(searchActions.updateAgeParam(evt.target.value))
     },
     [setAge, searchDispatch]
@@ -38,6 +41,7 @@ const PetsParams: React.FunctionComponent = () => {
   const handleSortChange = useCallback(
     (evt: React.ChangeEvent<HTMLSelectElement>) => {
       setSort(evt.target.value)
+      // updating the search object stored in context
       searchDispatch(searchActions.updateSortParam(evt.target.value))
     },
     [setSort, searchDispatch]

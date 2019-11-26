@@ -42,22 +42,26 @@ interface Data {
 }
 
 const PetsPages: React.FunctionComponent<Data | null> = (props) => {
-  // accessing the context
+  // accessing the context to get the dispatch function
   const { searchDispatch } = useContext(SearchContext)
   const handlePageChange = useCallback(
     (pageNum) => {
+      // updating the search object stored in context
       searchDispatch(searchActions.updatePageParam(pageNum))
     },
     [searchDispatch]
   )
   if(props.data === null || props.data.pages === 0) {
+    // returning no components if there are no pages
     return null
   } else {
+    // creating pages array
     let pageList = []
     for(let idx = 1; idx <= props.data.pages; idx++) {
       pageList.push(
         <li
           key={idx}
+          // passing 'active' css class to current page
           className={props.data.page === idx ? styles.active : ''}
           onClick={() => { handlePageChange(idx) }}
         >{idx}</li>

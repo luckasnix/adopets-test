@@ -7,8 +7,11 @@ import styles from './PetsMain.module.css'
 const apiKey: string = '4bdafbc5-c2cb-4a5a-8932-3bd929de4f18'
 
 const PetsMain: React.FunctionComponent = () => {
+  // state to show the loader depending on the boolean status
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  // state to store the access key
   const [accessKey, setAccessKey] = useState<string>('')
+  // asynchronous function to accessing the api
   const fetchAccessKey = useCallback(
     async() => {
       await fetch(
@@ -20,10 +23,13 @@ const PetsMain: React.FunctionComponent = () => {
         }
       )
       .then(
-        (res: Response) => res.json()
+        (res: Response) => {
+          return res.json()
+        }
       )
       .then(
         (res: any) => {
+          // storing the access key on own state
           setAccessKey(res.data.access_key)
         }
       )
@@ -33,6 +39,7 @@ const PetsMain: React.FunctionComponent = () => {
   useEffect(
     () => {
       if(!accessKey.length) {
+        // fetching data if there are no access key
         fetchAccessKey()
       }
     },
@@ -41,6 +48,7 @@ const PetsMain: React.FunctionComponent = () => {
   useEffect(
     () => {
       if(accessKey.length) {
+        // setting the 'loading' state to 'false' after fetching the access key
         console.log('Primeira chave:', accessKey)
         setIsLoading(false)
       }

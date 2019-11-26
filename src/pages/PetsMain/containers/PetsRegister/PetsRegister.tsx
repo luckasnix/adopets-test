@@ -3,10 +3,12 @@ import { withRouter } from 'react-router-dom'
 import PetsInput from './components/PetsInput'
 import styles from './PetsRegister.module.css'
 
+// data to pre-filled registration
 const userEmail = 'usuario-test@adopets.com'
 const userPassword = '123123'
 
 const PetsRegister: React.FunctionComponent<any> = (props) => {
+  // asynchronous function to accessing the api
   const registerUser = useCallback(
     async (token: string) => {
       await fetch(
@@ -26,12 +28,14 @@ const PetsRegister: React.FunctionComponent<any> = (props) => {
       )
       .then(
         (res: any) => {
+          // navigating to home page after get the new access key
           props.history.push('/home', { accessKey: res.data.access_key })
         }
       )
     },
     [props.history]
   )
+  // function to register the user
   const handleUserSignIn = useCallback(
     (evt: React.FormEvent) => {
       evt.preventDefault()

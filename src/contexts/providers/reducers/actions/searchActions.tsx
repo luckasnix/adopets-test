@@ -1,5 +1,6 @@
 import * as searchTypes from './types/searchTypes'
 
+// action creators with data to pass to reducer
 export function updateSexParam(sex: string) {
   return {
     type: searchTypes.UPDATE_SEX_PARAM,

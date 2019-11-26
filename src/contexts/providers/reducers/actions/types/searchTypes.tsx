@@ -1,3 +1,4 @@
+// action types
 export const UPDATE_SEX_PARAM = 'UPDATE_SEX_PARAM'
 export const UPDATE_SIZE_PARAM = 'UPDATE_SIZE_PARAM'
 export const UPDATE_AGE_PARAM = 'UPDATE_AGE_PARAM'

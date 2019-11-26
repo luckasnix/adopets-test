@@ -6,6 +6,7 @@ interface Search {
   children: React.ReactNode;
 }
 
+// creating the initial state with all fields of the search object
 const initialState = {
   search: {
     _fields: ['id', 'uuid', 'custom_code', 'name', 'specie_id', 'breed_primary_id', 'price', 'created_date', 'status_key', 'branch_id', 'payment_model_key', 'sex_key', 'size_key', 'age_key'],
@@ -34,6 +35,7 @@ const initialState = {
 }
 
 const SearcProvider: React.FunctionComponent<Search> = (props) => {
+  // getting the state and the dispatch function from reducer
   const [searchState, searchDispatch] = useReducer(searchReducer, initialState)
   return (
     <SearchContext.Provider value={{ searchState, searchDispatch }}>

@@ -41,12 +41,14 @@ interface Data {
 
 const PetsData: React.FunctionComponent<Data | null> = (props) => {
   if(props.data === null || props.data.result.length === 0) {
+    // returning feedback message if there are no data to display
     return (
       <div className={styles.noList}>
         <p>No data to display</p>
       </div>
     )
   } else {
+    // creating a list to display all items
     return (
       <ul className={styles.list}>
         {
